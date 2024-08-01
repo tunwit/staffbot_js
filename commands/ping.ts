@@ -2,8 +2,6 @@ import { Combine } from "../utility/combind"
 
 const {SlashCommandBuilder, ChatInputCommandInteraction} = require("discord.js")
 
-console.log(1);
-
 const combind = new Combine()
 const command = new SlashCommandBuilder()
                 .setName("ping")
@@ -14,7 +12,5 @@ const action_ping = async (interaction:typeof ChatInputCommandInteraction) => {
 }
 
 combind.add(command,action_ping)
-
-console.log(2);
 
 export default combind

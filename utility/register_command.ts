@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
-import { SlashCommandBuilder, type Client } from 'discord.js';
-import type { Combine, CommandObj } from "../utility/combind";
+import { SlashCommandBuilder, type Client, type SlashCommandOptionsOnlyBuilder } from 'discord.js';
+import type { Combine, CommandObj } from "./combind";
 import combind from "../commands/ping";
 
 
@@ -11,8 +11,7 @@ const files = fs.readdirSync(foldersPath).filter((file:String) => file.endsWith(
 
 var commandInstance:CommandObj[] = []
 async function load(bot:Client) {
-	let allcommands:SlashCommandBuilder[] = []
-	console.log(1);
+	let allcommands:SlashCommandBuilder|SlashCommandOptionsOnlyBuilder[] = []
 	
 	for (const file of files) {
 		const commandsPath = path.join(foldersPath, file);
