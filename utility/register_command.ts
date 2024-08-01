@@ -2,7 +2,6 @@ import fs from "node:fs"
 import path from "node:path"
 import { SlashCommandBuilder, type Client, type SlashCommandOptionsOnlyBuilder } from 'discord.js';
 import type { Combine, CommandObj } from "./combind";
-import combind from "../commands/ping";
 
 
 const foldersPath:string = path.join(Bun.main,"commands");
