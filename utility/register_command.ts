@@ -4,7 +4,8 @@ import { SlashCommandBuilder, type Client, type SlashCommandOptionsOnlyBuilder }
 import type { Combine, CommandObj } from "./combind";
 
 
-const foldersPath:string = path.join(Bun.main,"commands");
+const foldersPath:string = path.join(process.cwd(),"commands");
+console.log(foldersPath);
 
 const files = fs.readdirSync(foldersPath).filter((file:String) => file.endsWith('.ts'))
 
