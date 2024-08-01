@@ -1,7 +1,8 @@
 import {Client, Events, GatewayIntentBits} from "discord.js"
 import type { Interaction, SlashCommandBuilder } from "discord.js";
 import path from "node:path"
-import load from "./handler/register_command";
+import { load,commandInstance } from "./handler/register_command";
+
 
 const bot = new Client({intents: [
     "Guilds",
@@ -22,9 +23,8 @@ bot.once("ready",async (e:typeof bot)=>{
     
 bot.on(Events.InteractionCreate,async (interaction:Interaction) =>{
     if (interaction.isChatInputCommand()){
-        let commandPath = path.join(__dirname,'commands',`${interaction.commandName}.ts`)
-        const commmand:{data:SlashCommandBuilder,"execute":CallableFunction} = require(commandPath)
-        await commmand["execute"](interaction);
+        let command = commandInstance.filter(command=>command.command.name==interaction.commandName)
+        await command[0].action(interaction);
     }
 })
 
