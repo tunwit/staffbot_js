@@ -1,8 +1,7 @@
 import {Client, Events, GatewayIntentBits} from "discord.js"
-import type { Interaction, SlashCommandBuilder } from "discord.js";
+import type { Interaction } from "discord.js";
 import path from "node:path"
 import { load,commandInstance } from "./utility/register_command";
-
 
 const bot = new Client({intents: [
     "Guilds",
