@@ -1,6 +1,6 @@
 import { getVoiceConnection, joinVoiceChannel } from "@discordjs/voice"
 import { Combine } from "../utility/combind"
-import { type GuildMember, SlashCommandBuilder, type GuildTextBasedChannel, type TextBasedChannel } from "discord.js"
+import { GuildMember, SlashCommandBuilder, type GuildTextBasedChannel, type TextBasedChannel } from "discord.js"
 import { ChatInputCommandInteraction } from "discord.js"
 import Receiver from "../utility/receiver"
 
@@ -18,9 +18,10 @@ const action_join = async (interaction: ChatInputCommandInteraction) => {
         if (connection){
             connection.destroy()
         }
-        const member = interaction.member as GuildMember
-        console.log(member.voice.channel);
-        
+        const member = interaction.member   
+        if (!(member instanceof GuildMember)){
+            return
+        }
         if (member.voice.channel){
             connection = joinVoiceChannel({
                 channelId: member.voice.channel.id,

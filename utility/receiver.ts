@@ -1,12 +1,22 @@
+import { OpusEncoder } from "@discordjs/opus";
 import { EndBehaviorType, type VoiceReceiver } from "@discordjs/voice";
-import { OpusApplication, OpusEncoder } from "audify";
 
 class Receiver{
     receive:VoiceReceiver
     constructor(voicereceiver:VoiceReceiver){
         this.receive = voicereceiver
         this.receive.speaking.on("start",(userID:string)=>{
-            this.listen(userID)
+            console.log(userID);
+            console.log(this.receive.speaking.users);
+            
+
+            
+            if (!(userID in this.receive.speaking.users
+            )){
+                this.listen(userID)
+                console.log("add listener");
+                
+            }   
         })
     }
     
@@ -17,11 +27,13 @@ class Receiver{
                 behavior:EndBehaviorType.Manual
             }
         })
-        const encoder = new OpusEncoder( 48000, 2, OpusApplication.OPUS_APPLICATION_VOIP);
-        stream.on("data",(chunk)=>{
-            const encode = encoder.encode(chunk,1920)
-            console.log(encode);
-            pcm.push(encode)
+        const encoder = new OpusEncoder( 48000, 2);
+        stream.on("data",(chunk:Buffer)=>{
+            // const encode = encoder.encode(chunk)
+            // console.log(encode);
+            // pcm.push(encode)
+            // console.log(chunk);
+            
         })
         stream.on("end",()=>{
             console.log("end");   
